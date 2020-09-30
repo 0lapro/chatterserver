@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 import interfaces.MessageListener;
 import static interfaces.SocketMessengerConstants.*;
+import java.io.Serializable;
 import runner.MessageReceiver;
 import runner.MulticastSender;
 
@@ -18,7 +19,7 @@ import runner.MulticastSender;
  * 
  * @author 0laprogrmr@gmail.com
  */
-public class MessengerServer implements MessageListener//, Serializable
+public class MessengerServer implements MessageListener, Serializable
 {
     private static final long serialVersionUID = 1L;
     private ExecutorService serverExecutor; //The Executor that provides methods to manage termination and methods that can produce a Future for tracking progress of one or more asynchronous tasks.

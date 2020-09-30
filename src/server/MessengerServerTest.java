@@ -9,11 +9,18 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,10 +30,14 @@ import javax.swing.SwingUtilities;
  * @author 0laprogrmr@gmail.com
  * Test the OlasMessenger class.
  */
-public class MessengerServerTest
+public class MessengerServerTest implements Serializable
 {
     static MessengerServer messengerServer;
+    private static final long serialVersionUID = 1L;
+    private static boolean serverSaved;
+    private static boolean fileExists;
     Thread serverStarterThread;
+    private static boolean reinstated;
 
     public MessengerServerTest(MessengerServer server) {
         messengerServer = server;
@@ -36,9 +47,15 @@ public class MessengerServerTest
         System.out.println("\nMessengerServerTest: line 33-----------Current thread before SwingUtilities.invokeLater: "+Thread.currentThread().getName()+" state: "+Thread.currentThread().getState());
         SwingUtilities.invokeLater(() -> {
             System.out.println("\nMessengerServerTest: line 35-----------Current thread before makeSever: "+Thread.currentThread().getName()+" state: "+Thread.currentThread().getState());
-            restoreServerState();
-            if(!restoreServerState()){
+            if(!serverStateExists()){
+                return;
+            }
+            else{
+                restoreServerState();
+            }
+            if(!reinstated()){
                 new MessengerServerTest(new MessengerServer()).makeServer();
+                System.out.println("Not Reinstated!: new server instance created");
             }
             System.out.println("\nMessengerServerTest: line 35-----------Current thread after makeServer: "+Thread.currentThread().getName()+" state: "+Thread.currentThread().getState());
         });
@@ -126,39 +143,33 @@ public class MessengerServerTest
     
     public static void saveServerState(){
         try {
-            FileOutputStream fOs = new FileOutputStream("messengerserver.ser");
-            ObjectOutputStream oOs = new ObjectOutputStream(fOs);
-            oOs.writeObject(getMessengerServer());
-            oOs.close();
-            fOs.close();
-            System.out.println("\nSerialized data is successfully SAVED as \"messengerserver.ser\" in the state folder "+new java.util.Date());
+            try (FileOutputStream fOs = new FileOutputStream("messengerserver.ser"); ObjectOutputStream oOs = new ObjectOutputStream(fOs)) {
+                oOs.writeObject(getMessengerServer());
+                setServerSaved(true);
+                System.out.println("\nSerialized data is successfully SAVED as \"messengerserver.ser\" in the state folder "+new java.util.Date());
+            }
         } catch (IOException iOe) {
             iOe.getMessage();
         }
     }//End saveServerState()
     
-    public static boolean restoreServerState(){
-        try {
-            FileInputStream fIs = new FileInputStream("messengerserver.ser");
-            ObjectInputStream oIs = new ObjectInputStream(fIs);
-            setMessengerServer((MessengerServer) oIs.readObject());
+    public static void restoreServerState(){
+        System.out.println("Method Entrance: restoreServerState");
+        try (FileInputStream fIs = new FileInputStream("messengerserver.ser"); ObjectInputStream oIs = new ObjectInputStream(fIs)) {
+            oIs.readObject();
+            setReinstated(true);
             new MessengerServerTest(getMessengerServer()).makeServer();
-            oIs.close();
-            fIs.close();
             System.out.println("\nSerialized class \"messengerserver.ser\" is successfully REINSTATED at "+new java.util.Date());
-            return true;
-        } catch (IOException | ClassNotFoundException e) {
-            e.getMessage();
+        } catch (FileNotFoundException ex) {  
+        Logger.getLogger(MessengerServerTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(MessengerServerTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+       System.out.println("Method Exit: restoreServerState");
     }//End restoreServerState()
     
-    public static void setMessengerServer(MessengerServer msngrSvr) {
-        messengerServer = msngrSvr;
-    }
-    
     public static MessengerServer getMessengerServer() {
-        return messengerServer;
+        return MessengerServerTest.messengerServer;
     }
 
     public void nameServerStarterThread(){
@@ -171,5 +182,44 @@ public class MessengerServerTest
 
     public void setServerStarterThread(Runnable runnable) {
         this.serverStarterThread = new Thread(runnable);
+    }
+    
+    public static void setServerSaved(boolean isServerSaved) {
+        serverSaved = isServerSaved;
+    }
+    
+    public static boolean serverSaved() {
+        return serverSaved;
+    }
+    
+    public static void setReinstated(boolean isRestored) {
+        reinstated = isRestored;
+    }
+    
+    public static boolean reinstated() {
+        return reinstated;
+    }
+    
+    public static void setFileExistence(boolean isFileFound) {
+        fileExists = isFileFound;
+    }
+    
+    public static boolean fileExists() {
+        return fileExists;
+    }
+    
+    public static boolean serverStateExists(){
+        String relativePath = "\\Documents\\chatterserver\\messengerserver.ser";
+        String absolutePath = System.getenv("USERPROFILE")+relativePath;
+        File file = new File(absolutePath);
+        
+        if(file.exists() && !file.isDirectory()) { 
+            setFileExistence(true);
+        }
+        if(!serverSaved() && !fileExists()){
+            System.out.println("Saved server state NOT found");
+            return false;
+        }
+        return true;
     }
 }//End class MessengerServerTest
