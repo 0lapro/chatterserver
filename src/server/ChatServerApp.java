@@ -20,7 +20,6 @@ import javax.swing.SwingUtilities;
 /**
  * Chat server user interface class.
  * @author ola bash
- * @author-email 0laprogrmr@gmail.com
  */
 public class ChatServerApp {
 
@@ -120,23 +119,20 @@ public class ChatServerApp {
                 Logger.getLogger(ChatServerApp.class.getName()).log(Level.INFO, "SERVER GUI closed at: {0}", new java.util.Date()+"\n");
                 getChatServer().setServerClosed(true);
                 System.exit(0);
-            } // end method windowClosing
+            } // end windowClosing
         } // end WindowAdapter
         ); // end addWindowListener
     }// End makeServer
 
     private class ServerStarterJob implements Runnable {
-
         @Override
         public void run() {
             getChatServer().startServer();
             Logger.getLogger(ChatServerApp.class.getName()).log(Level.INFO, "START SERVER METHOD called at: {0} by {1} state: {2}", new Object[]{new java.util.Date(), Thread.currentThread().getName(), Thread.currentThread().getState()+"\n"});
-            
         }
     }
 
     private class ServerStopperJob implements Runnable {
-
         @Override
         public void run() {
             Logger.getLogger(ChatServerApp.class.getName()).log(Level.INFO, "STOP SERVER METHOD called at: {0} by {1} state: {2}", new Object[]{new java.util.Date(), Thread.currentThread().getName(), Thread.currentThread().getState()+"\n"});
@@ -165,14 +161,11 @@ public class ChatServerApp {
                 setReinstated(true);
                 System.out.println("Reinstated: "+reinstated());
             }
-            
-            // System.out.println("\nSerialized class \"chatserver.ser\" is successfully REINSTATED at " + new java.util.Date());
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ChatServerApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ChatServerApp.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         System.out.println("Method Exit: restoreServerState");
     }//End restoreServerState()
 
