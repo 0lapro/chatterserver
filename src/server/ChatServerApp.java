@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
- * Chat server user interface class.
+ * Chat server GUI.
  * @author ola bash
  */
 public class ChatServerApp {

@@ -81,7 +81,7 @@ public class ChatServer implements Listener, Serializable
             Logger.getLogger(ChatServer.class.getName()).log(Level.INFO, "Server socket was closed at {0}", new java.util.Date()+"\n");
             Logger.getLogger(ChatServer.class.getName()).log(Level.INFO, "Server down at {0}", new java.util.Date()+"\n");
             Logger.getLogger(ChatServer.class.getName()).log(Level.INFO, "Running Tasks List before the shutdown of server executor: {0}", getServerExecutor().toString()+"\n");
-            List<Runnable> unfinishedTasksList = getServerExecutor().shutdownNow();
+            List<Runnable> unfinishedTasksList = getServerExecutor().shutdownNow();//stop all actively executing tasks and return a list of the tasks that were awaiting execution.
             Logger.getLogger(ChatServer.class.getName()).log(Level.INFO, "Server executor is shutting down. ---> {0}", getServerExecutor().toString()+"\n");
             Logger.getLogger(ChatServer.class.getName()).log(Level.INFO, "Unfinished Tasks List of server executor: {0}", unfinishedTasksList.toString()+"\n");
         } catch (IOException | NullPointerException e) {
