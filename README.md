@@ -1,18 +1,29 @@
 ### Disclaimer
-This program is free for learning purposes. 
+This program is free for learning and educational purposes. 
 
 # Chatterserver
-A stand-alone instant messenger server with simple GUI that allows you to control the server without closing the application. The threads are managed properly by the executor service and the GUI runs on the Event Dispatching Thread for thread-safety.
+A stand-alone instant messenger server with simple GUI that allows you to control the server without closing the application.
+
+## Semantics
+Everything in the program is named to reflect its purpose. The naming of the packages, classes, objects, methods, and variables are semantically correct and they all reflect what they do in the program. This makes writing test cases unambiguous and testing more meaningful.
 
 ## Object-Oriented approach
-1. The OOP approach separates concerns and allows room for easy improvement so anyone can improve it to its own taste.
+1. The OOP approach separates concerns and allows room for easy improvement so anyone can improve this server to its own taste.
 2. The interfaces are used to separate common behaviors and let any class implement them when needed.
 3. Classes that have common purposes are grouped into the same package.
 4. There's also room for inheritance if needed.
 5. All classes are loosely coupled to promote indepedence and avoid unneccessary dependencies.
 
-## Semantics
-Everything in the program is named to reflect its purpose. The naming of the packages, classes, objects, functions, and variables all follow proper semantics which reflects what they do in the program and plays a big role in testing.
+## Multithreading
+The threads are managed properly by the executor service and the GUI runs on the Event Dispatching Thread for thread-safety. 
+I used to write threaded Java applications to automate some of my personal computing tasks, to keep things simple I'm always having it at the back of my mind that a Thread is a worker that needs a job(Runnable) and a manager (ExecutorService) to manage the workers and their tasks. If you  are a Java programmer writing Threaded applications and you do not think of this then you are not in control of the Threads and their tasks and it's just a matter of time for things to break.
+
+## Networking
+ServerSocket is the server socket that waits for client requests to come in over the network.
+Socket (called just socket) is the server endpoint used for communicating with the client.
+
+## Serialization
+This is added so that the server can restore its last working state or any chosen normal state in case of any unexpected incident. If anything happens to the server and it shutdown unexpectedly (which is not supposed to happen unless caused by external circumstance), all you need to do is restart the server and it will restore to it last working state. This file is currently in the reinstatement folder with the .ser extension.
 
 ## Logging
 The logging allows for additional understanding of the application for analytic purpose.
