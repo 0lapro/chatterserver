@@ -19,7 +19,7 @@ The logging allows for additional understanding of the application for analytic 
 Two types of logging in the program, one is rough and the other is not. Rough logging is the print lines attached to most of the line of codes to see or track whether the code functions as intended and to track where any problem occurs. This rough logging was included when I was testing the code but left there just in case anybody is interested, but you can remove them carefully without mistakenly deleting any other thing unintentionally, and it will not affect the code. The other logging is a logger class from one of the utility tools in the program. The comments allow you to see clearly my intention when writing the code and what each line of code is aimed to achieve.
 
 # How it works
-1. One or more clients can join the chat [GITHUB] (https://github.com/0lapro/chatterclient) by connecting to the server with a username.
+1. One or more client(s) [GITHUB] (https://github.com/0lapro/chatterclient) can join the chat  by connecting to the server with a username.
 2. Either the server or client can run independently on the same network and either one of them can start first without affecting each other.
 3. Click the connect button and enter your username to start chatting
 4. If you stop the server while clients are connected and chatting, no message will be sent or received while the server is stopped. But if ou start the server again, all connections will automatically become active again and chatting can resume.
