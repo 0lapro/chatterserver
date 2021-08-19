@@ -23,7 +23,7 @@ Two types of logging in the program, one is rough and the other is not. Rough lo
 2. Either the server or client can run independently on the same network and either one of them can start first without affecting each other.
 3. Click the connect button and enter your username to start chatting
 4. If you stop the server while clients are connected and chatting, no message will be sent or received while the server is stopped. But if ou start the server again, all connections will automatically become active again and chatting can resume.
-5. If you close the server GUI, no message will be sent or received and if you start the server again unlike 4 above, user(s) must connected users must first reconnect before chatting can resume.
+5. If you close the server GUI, no message will be sent or received and if you start the server again unlike 4 above, connected users must reconnect before chatting can resume.
 6. On the same network, you can run the chatterserver and chatterclient on either same or separate computers on Windows or Linux where Java and JDK is installed or you can add or tweak one or few lines of code to add one-to-one chatting capability and run it on different networks completely.
 
 
