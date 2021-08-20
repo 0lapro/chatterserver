@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package chatterserver.src.util;
 
 import java.util.logging.Level;
 
 /**
- *
- * @author Ola
+ * @author 0laprogrmr@gmail.com
  */
 public class Logger {
     
@@ -17,7 +11,6 @@ public class Logger {
     private String infoToLog;
      
     /**
-     *
      * @param className
      * @param info
      */

@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
 
 /**
  * Chat server GUI.
- * @author ola bash
+ * @author 0laprogrmr@gmail.com
  */
 public class ChatServerApp {
 
@@ -92,7 +92,7 @@ public class ChatServerApp {
             serverStopperThread.setName("serverStopperThread");
             serverStopperThread.start();
             stopButton.setEnabled(false);
-            startButton.setEnabled(true);//this statement calls the srv starter thread to do this task; maybe later, i'll find a way to let it be done inside the start button action listener.
+            startButton.setEnabled(true);
             Logger.getLogger(ChatServerApp.class.getName()).log(Level.INFO,
                 "Expected Svr stopper thread: {0}| state: {1} at: {2}\n", 
                 new Object[]{getServerStarterThread().getName(),

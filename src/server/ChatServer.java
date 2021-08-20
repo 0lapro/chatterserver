@@ -34,7 +34,6 @@ public class ChatServer implements Listener, Serializable
     private boolean serverClosed;
     private boolean serverOpened;
     private boolean msgComing;
-//    private Queue<String> msgQueue;
 
     /**
      * Starts the chat messenger server.

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 /**
  * This class can be used for reading a text file.
  *
- * @author Ola
+ * @author 0laprogrmr@gmail.com
  */
 public class TextFileReader {
 
