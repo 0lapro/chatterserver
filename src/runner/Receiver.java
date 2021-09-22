@@ -77,7 +77,7 @@ public class Receiver implements Runnable {
         }//end while  
         //if not listening
         try {
-            input.close(); // close BufferedReader (also closes Socket)/maybe it should do this.
+            input.close(); // Closes the stream and releases any system resources associated with it
         }   // end try
         catch (IOException iOe) {
             iOe.getMessage();

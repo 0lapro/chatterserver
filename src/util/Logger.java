@@ -24,19 +24,19 @@ public class Logger {
     }
     
     public String getReinstatementInfo(){
-        return "Serialized class \"chatserver.ser\" is successfully REINSTATED at "+new java.util.Date()+"\n";//reinstatement
+        return "Serialized class \"chatserver.ser\" is successfully REINSTATED at "+new java.util.Date()+"\n";
     }
     
     public String getNewInstanceInfo(){
-        return "Not Reinstated!: new chat server created at "+new java.util.Date()+"\n";//reinstatement
+        return "Not Reinstated!: new chat server created at "+new java.util.Date()+"\n";
     }
     
     public String getStartButtonInfo(){
-        return "SERVER START BUTTON clicked at "+new java.util.Date()+"\n";//reinstatement
+        return "SERVER START BUTTON clicked at "+new java.util.Date()+"\n";
     }
     
     public String getStopButtonInfo(){
-        return "SERVER STOP BUTTON clicked at "+new java.util.Date()+"\n";//reinstatement
+        return "SERVER STOP BUTTON clicked at "+new java.util.Date()+"\n";
     }
     
     public String getThreadNameAndState(){
@@ -63,17 +63,9 @@ public class Logger {
         String fileName = "src\\server\\ChatServerUI.java";
         TextFileReader file = new TextFileReader(fileName);
         String[] arrayLines = file.openFile();
-//        for (String arrayLine : arrayLines) {
-//            System.out.println(arrayLine);
-//        }
         
         for (int i=0; i<arrayLines.length; i++) {
             System.out.println(i+"---"+arrayLines[i]);
         } 
     }
-    
-//    public static void main(String[] args){
-//        readFile();
-//    }
-    
 }
