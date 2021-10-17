@@ -1,7 +1,7 @@
 ### Disclaimer
 This program is free for learning and educational purposes. 
 
-# chat messenger
+# chat server
 A stand-alone instant messenger server with simple GUI that allows you to control the server without closing the application.
 
 ## Semantics
